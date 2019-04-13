@@ -63,5 +63,22 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision 'shell', path: './provision/nvm.sh', args: '10.15.3', privileged: false
+
+  def args(hash)
+    # Only to make args more verbose
+    # Order of keys is important
+    hash.values.join(' ')
+  end
+
+  config.vm.provision 'shell' do |s|
+    s.path       = './provision/nvm.sh'
+    s.args       = args(node_version: '10.15.3')
+    s.privileged = false
+  end
+
+  config.vm.provision 'shell' do |s|
+    s.path       = './provision/jabba.sh'
+    s.args       = args(java_version: '1.8')
+    s.privileged = false
+  end
 end
