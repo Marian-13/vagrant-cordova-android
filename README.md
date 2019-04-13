@@ -7,7 +7,6 @@
 $ sudo apt install git
 ```
 
-
 ### First time usage
 ```
 $ git clone https://github.com/marian-13/vagrant-cordova-android
@@ -17,6 +16,11 @@ $ git clone https://github.com/marian-13/vagrant-cordova-android
 
 
 ### How `vagrant-cordova-android` was set up
+0. Vim
+```
+$ sudo apt install vim
+```
+
 1. Folder
 ```
 $ mkdir vagrant-cordova-android
@@ -26,3 +30,9 @@ $ cd vagrant-cordova-android
 ```
 $ vagrant init ubuntu/bionic64
 ```
+
+### FAQ
+
+1. Is it possible to up vagrant box from VM using VirtualBox?
+
+[Quick asnwer: Only in specific cases](https://stackoverflow.com/questions/24620599/error-vt-x-not-available-for-vagrant-machine-inside-virtualbox)
