@@ -1,5 +1,7 @@
 ### Setup Guide
 
+0. Connect to Internet
+
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html) if you haven't done it yet
 
 2. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) if you haven't done it yet
@@ -27,6 +29,14 @@
 
 7. Get excited by automation!
 
+### Important!!!
+- Vagrant runs provision scripts as `/root` by default. Specify `privileged: false` to run them as `/home/vagrant`.
+- If you need to set a permanent variable - set it in `~/.profile`. (`~/.bashrc` variables are not visible during running of provision scripts **TODO:** why?)
+
+### Best Practices
+- Writing provision shell scripts try to inline their dependencies
+- It is sometimes better to read command docs right in the command line before googling (e.g. `sdkmanager`)
+
 ### FAQ
 
 - [**How to check whether VM is running?**](https://www.vagrantup.com/docs/cli/status.html)
@@ -45,9 +55,9 @@
   ```Ruby
   config.vm.provision "shell", inline: <<-SHELL
     Your shell commands here...
-    SHELL
+  SHELL
   ```
-  To avoid executing long-running tasks every time when provision is changed - make sure your shell commands are [idempotent](https://github.com/metaist/idempotent-bash#what-does-idempotent-mean)
+  To avoid executing long-running tasks every time when provision is changed - make sure your shell commands are [idempotent](https://github.com/metaist/idempotent-bash#what-does-idempotent-mean)[(Another definition)](https://stackoverflow.com/questions/1077412/what-is-an-idempotent-operation)
 
   2. Run the following command
   ```
@@ -68,6 +78,17 @@
 - **How to change current user to `root`?**
   ```
   $ sudo -i
+  ```
+
+- **How to check if variable defined in file?**
+  ```
+  cat .bashrc | grep ANDROID_SDK_ROOT
+  ```
+
+- **How to check if folder included in `$PATH`?**
+  ```
+  echo $PATH | grep "/home/vagrant/android/platform-tools[:|$]"
+  echo $PATH | grep "${ANDROID_HOME}/tools[:|$]"
   ```
 
 - **How `vagrant-cordova-android` was configured?**
@@ -97,9 +118,3 @@
 - **Is it possible to up VM managed by Vargant from another VM created by VirtualBox (Nesting of virtual machines)?**
 
   [Only in specific cases](https://stackoverflow.com/questions/24620599/error-vt-x-not-available-for-vagrant-machine-inside-virtualbox)
-
-### Best Practices
-- Writing provision shell scripts always inline their dependencies
-
-### Important!!!
-- Vagrant runs provision scripts as `/root` by default. Specify `privileged: false` to run them as `/home/vagrant`.

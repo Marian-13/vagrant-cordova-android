@@ -71,28 +71,39 @@ Vagrant.configure("2") do |config|
   def args(hash)
     # Only to make args more verbose
     # Order of keys is important
-    hash.values.join(' ')
+    # If value contains single quotes - they should be escaped like so - \'
+    hash.values.map { |value| "'#{value}'"}.join(' ')
   end
 
   config.vm.provision :shell do |s|
+    s.name       = :vim
+    s.path       = path(:vim)
+    s.privileged = false
+  end
+
+  config.vm.provision :shell do |s|
+    s.name       = :nvm
     s.path       = path(:nvm)
     s.args       = args(node_version: '10.15.3')
     s.privileged = false
   end
 
   config.vm.provision :shell do |s|
+    s.name       = :jabba
     s.path       = path(:jabba)
     s.args       = args(java_version: '1.8')
     s.privileged = false
   end
 
   config.vm.provision :shell do |s|
+    s.name       = :gradle
     s.path       = path(:gradle)
     s.privileged = false
   end
 
   config.vm.provision :shell do |s|
     # Assumes `node` is already installed
+    s.name       = :cordova
     s.path       = path(:cordova)
     s.args       = args(cordova_version: '9.0.0')
     s.privileged = false
