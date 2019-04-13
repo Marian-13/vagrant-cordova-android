@@ -108,4 +108,18 @@ Vagrant.configure("2") do |config|
     s.args       = args(cordova_version: '9.0.0')
     s.privileged = false
   end
+
+  config.vm.provision :shell do |s|
+    # Assumes `java` is already installed
+    s.name       = :android
+    s.path       = path(:android)
+    s.args       = args(
+      android_sdk_tools_version: '4333796',
+      android_platform_version: 'platforms;android-28',
+      android_build_tools_version: 'build-tools;28.0.3',
+      android_system_image_version: 'system-images;android-28;google_apis;x86_64',
+      android_avd_name: 'test'
+    )
+    s.privileged = false
+  end
 end
