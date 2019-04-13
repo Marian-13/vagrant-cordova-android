@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# nvm
 # https://github.com/creationix/nvm
 # https://nodejs.org/
 # https://github.com/robertkowalski/vagrant-nvm/blob/master/provision.sh

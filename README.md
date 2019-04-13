@@ -98,5 +98,8 @@
 
   [Only in specific cases](https://stackoverflow.com/questions/24620599/error-vt-x-not-available-for-vagrant-machine-inside-virtualbox)
 
+### Best Practices
+- Writing provision shell scripts always inline their dependencies
+
 ### Important!!!
 - Vagrant runs provision scripts as `/root` by default. Specify `privileged: false` to run them as `/home/vagrant`.

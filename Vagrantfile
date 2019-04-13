@@ -81,4 +81,9 @@ Vagrant.configure("2") do |config|
     s.args       = args(java_version: '1.8')
     s.privileged = false
   end
+
+  config.vm.provision 'shell' do |s|
+    s.path       = './provision/gradle.sh'
+    s.privileged = false
+  end
 end
