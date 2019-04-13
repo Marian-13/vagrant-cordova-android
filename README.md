@@ -6,3 +6,11 @@
 ```
 $ sudo apt install git
 ```
+
+
+### First time usage
+```
+$ git clone https://github.com/marian-13/vagrant-cordova-android
+```
+
+### Usage
