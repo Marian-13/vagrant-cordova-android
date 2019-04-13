@@ -65,22 +65,38 @@
   **TODO:** Check if better options are available
 
 
-- **How `vagrant-cordova-android` was set up**
-  1. Vim
+- **How to change current user to `root`?**
   ```
-  $ sudo apt install vim
+  $ sudo -i
   ```
 
-  2. Folder
+- **How `vagrant-cordova-android` was configured?**
+  1. Folder
   ```
   $ mkdir vagrant-cordova-android
   $ cd vagrant-cordova-android
   ```
-  3. VagrantBox: [Official Ubuntu 18.04 LTS (Bionic Beaver)](https://app.vagrantup.com/ubuntu/boxes/bionic64)
+  2. Vagrant Box: [Official Ubuntu 18.04 LTS (Bionic Beaver)](https://app.vagrantup.com/ubuntu/boxes/bionic64)
   ```
   $ vagrant init ubuntu/bionic64
   ```
 
+  3. Example of adding [nvm](https://github.com/creationix/nvm) and [node](https://nodejs.org/en/) v10.15.3
+    ```Ruby
+    config.vm.provision 'shell', path: './provision/nvm.sh', args: '10.15.3', privileged: false
+    ```
+    ```
+    $ touch provision/nvm.sh
+    ```
+    If `privileged: false` was not specified here, then `nvm` would have been installed for `root` user.
+
+    Value of `agrs` is accessable in `provision/nvm.sh` as `$1`.
+
+- **[How to pass multiple arguments to script?](https://stackoverflow.com/questions/15461898/passing-variable-to-a-shell-script-provisioner-in-vagrant#)**
+
 - **Is it possible to up VM managed by Vargant from another VM created by VirtualBox (Nesting of virtual machines)?**
 
   [Only in specific cases](https://stackoverflow.com/questions/24620599/error-vt-x-not-available-for-vagrant-machine-inside-virtualbox)
+
+### Important!!!
+- Vagrant runs provision scripts as `/root` by default. Specify `privileged: false` to run them as `/home/vagrant`.
