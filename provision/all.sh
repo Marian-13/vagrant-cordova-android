@@ -3,7 +3,15 @@
 # Vim
 # https://www.vim.org/
 
-sudo apt-get install vim
+sudo apt install -y vim
+
+
+#!/usr/bin/env bash
+#
+# curl
+# https://curl.haxx.se/
+
+sudo apt install -y curl
 
 
 #!/usr/bin/env bash

@@ -3,4 +3,4 @@
 # Vim
 # https://www.vim.org/
 
-sudo apt-get install vim
+sudo apt install -y vim
