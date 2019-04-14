@@ -29,7 +29,7 @@ ANDROID_AVD_NAME=$5
 sudo apt-get -y install zip
 sudo apt-get -y install unzip
 
-wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip --no-clobber --directory-prefix=~/android
+wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip --no-clobber --directory-prefix=$HOME/android
 unzip -n ~/android/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip -d ~/android
 
 cat ~/.profile | grep "ANDROID_HOME="     || echo "export ANDROID_HOME=~/android" >> ~/.profile

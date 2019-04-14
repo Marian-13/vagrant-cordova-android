@@ -31,6 +31,7 @@
 
 ### Important!!!
 - VirtualBox does not support nested virtualization on my PC `sudo kvm-ok`
+- Some commands (e.g. `wget`) do NOT interpolate `~`. Use `$HOME` instead (e.g. --directory_prefix=$HOME/android)
 - Vagrant runs provision scripts as `/root` by default. Specify `privileged: false` to run them as `/home/vagrant`.
 - If you need to set a permanent variable - set it in `~/.profile`. (`~/.bashrc` variables are not visible during running of provision scripts **TODO:** why?)
 - If you have a strange Android-related issue and you have read the whole log output very carefully and still can not find a solution - create a quick cordova app and maybe `cordova requirements` or `cordova run android` will have a better error description

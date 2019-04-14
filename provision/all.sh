@@ -25,9 +25,9 @@ NODE_VERSION='10.15.3'
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-cat ~/.profile | grep "source ~/.nvm/nvm.sh" || echo "source ~/.nvm/nvm.sh" >> ~/.profile
-
-source ~/.profile
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 nvm install $NODE_VERSION
 
@@ -113,7 +113,7 @@ ANDROID_AVD_NAME='test'
 sudo apt-get -y install zip
 sudo apt-get -y install unzip
 
-wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip --no-clobber --directory-prefix=~/android
+wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip --no-clobber --directory-prefix=$HOME/android
 unzip -n ~/android/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip -d ~/android
 
 cat ~/.profile | grep "ANDROID_HOME="     || echo "export ANDROID_HOME=~/android" >> ~/.profile
