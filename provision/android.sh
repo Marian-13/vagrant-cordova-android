@@ -59,4 +59,5 @@ yes '' | avdmanager create avd -n $ANDROID_AVD_NAME -k $ANDROID_SYSTEM_IMAGE_VER
 
 sudo apt-get update
 
-yes | sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
+sudo apt-get install -y qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
+sudo apt-get install -y libglu1
