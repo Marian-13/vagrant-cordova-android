@@ -9,8 +9,8 @@ NODE_VERSION=$1
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-echo "source ~/.nvm/nvm.sh" >> .profile
+cat ~/.profile | grep "source ~/.nvm/nvm.sh" || echo "source ~/.nvm/nvm.sh" >> ~/.profile
 
-source .profile
+source ~/.profile
 
 nvm install $NODE_VERSION

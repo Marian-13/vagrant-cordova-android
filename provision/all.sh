@@ -25,9 +25,9 @@ NODE_VERSION='10.15.3'
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-echo "source ~/.nvm/nvm.sh" >> .profile
+cat ~/.profile | grep "source ~/.nvm/nvm.sh" || echo "source ~/.nvm/nvm.sh" >> ~/.profile
 
-source .profile
+source ~/.profile
 
 nvm install $NODE_VERSION
 
@@ -113,12 +113,13 @@ ANDROID_AVD_NAME='test'
 sudo apt-get -y install zip
 sudo apt-get -y install unzip
 
-wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip --no-clobber --directory-prefix=./android
-unzip -n ./android/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip -d ./android
+wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip --no-clobber --directory-prefix=~/android
+unzip -n ~/android/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip -d ~/android
 
 cat ~/.profile | grep "ANDROID_HOME="     || echo "export ANDROID_HOME=~/android" >> ~/.profile
 cat ~/.profile | grep "ANDROID_SDK_ROOT=" || echo "export ANDROID_SDK_ROOT=~/android" >> ~/.profile
 cat ~/.profile | grep "ANDROID_SDK_HOME=" || echo "export ANDROID_SDK_HOME=~" >> ~/.profile
+
 source ~/.profile
 
 echo $PATH | grep "${ANDROID_HOME}/tools[:|$]"          || echo 'export PATH="${PATH}:${ANDROID_HOME}/tools"' >> ~/.profile
@@ -129,10 +130,8 @@ source ~/.profile
 
 touch ~/.android/repositories.cfg
 
-sdkmanager $ANDROID_PLATFORM_VERSION
-echo hello
-echo $ANDROID_BUILD_TOOLS_VERSION
-sdkmanager $ANDROID_BUILD_TOOLS_VERSION
+yes | sdkmanager $ANDROID_PLATFORM_VERSION
+yes | sdkmanager $ANDROID_BUILD_TOOLS_VERSION
 yes | sdkmanager "platform-tools"
 yes | sdkmanager $ANDROID_SYSTEM_IMAGE_VERSION
 yes | sdkmanager --licenses

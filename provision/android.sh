@@ -22,8 +22,6 @@
 
 ANDROID_SDK_TOOLS_VERSION=$1
 ANDROID_PLATFORM_VERSION=$2
-echo hello
-echo $3
 ANDROID_BUILD_TOOLS_VERSION=$3
 ANDROID_SYSTEM_IMAGE_VERSION=$4
 ANDROID_AVD_NAME=$5
@@ -31,12 +29,13 @@ ANDROID_AVD_NAME=$5
 sudo apt-get -y install zip
 sudo apt-get -y install unzip
 
-wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip --no-clobber --directory-prefix=./android
-unzip -n ./android/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip -d ./android
+wget https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip --no-clobber --directory-prefix=~/android
+unzip -n ~/android/sdk-tools-linux-$ANDROID_SDK_TOOLS_VERSION.zip -d ~/android
 
 cat ~/.profile | grep "ANDROID_HOME="     || echo "export ANDROID_HOME=~/android" >> ~/.profile
 cat ~/.profile | grep "ANDROID_SDK_ROOT=" || echo "export ANDROID_SDK_ROOT=~/android" >> ~/.profile
 cat ~/.profile | grep "ANDROID_SDK_HOME=" || echo "export ANDROID_SDK_HOME=~" >> ~/.profile
+
 source ~/.profile
 
 echo $PATH | grep "${ANDROID_HOME}/tools[:|$]"          || echo 'export PATH="${PATH}:${ANDROID_HOME}/tools"' >> ~/.profile
@@ -47,8 +46,8 @@ source ~/.profile
 
 touch ~/.android/repositories.cfg
 
-sdkmanager $ANDROID_PLATFORM_VERSION
-sdkmanager $ANDROID_BUILD_TOOLS_VERSION
+yes | sdkmanager $ANDROID_PLATFORM_VERSION
+yes | sdkmanager $ANDROID_BUILD_TOOLS_VERSION
 yes | sdkmanager "platform-tools"
 yes | sdkmanager $ANDROID_SYSTEM_IMAGE_VERSION
 yes | sdkmanager --licenses
